@@ -1,0 +1,13 @@
+{
+  "currentDate": "20-Nov-2026",
+  "previousDate": "19-Nov-2026",
+  "FutureDay": [],
+  "CurrentDay": [
+    {"displayName": "52 Week High Low Report", "fileActlName": "CM_52_wk_High_low_20112026.csv", "fileHashKey": "CM-52 WEEK-HIGH_LOW-1", "fileKey": "CM-52 WEEK-HIGH_LOW", "filePath": "https://nsearchives.nseindia.in/content/", "filePosition": 6, "fileSegment": "CM", "fileSize": "317.71 KB", "tradingDate": "20-Nov-2026"}
+  ],
+  "PreviousDay": [
+    {"displayName": "52 Week High Low Report", "fileActlName": "CM_52_wk_High_low_19112026.csv", "fileHashKey": "CM-52 WEEK-HIGH_LOW-3", "fileKey": "CM-52 WEEK-HIGH_LOW", "filePath": "https://nsearchives.nseindia.in/content/", "filePosition": 30, "fileSegment": "CM", "fileSize": "317.86 KB", "tradingDate": "19-Nov-2026"},
+    {"displayName": "CM-UDiFF Common Bhavcopy Final (zip)", "fileActlName": "BhavCopy_NSE_CM_0_0_0_20261119_F_0000.csv.zip", "fileHashKey": "CM-UDIFF-BHAVCOPY-CSV-3", "fileKey": "CM-UDIFF-BHAVCOPY-CSV", "filePath": "https://nsearchives.nseindia.in/content/cm/", "filePosition": 36, "fileSegment": "CM", "fileSize": "203.06 KB", "tradingDate": "19-Nov-2026"},
+    {"displayName": "Bulk Deals (csv)", "fileActlName": "bulk.csv", "fileHashKey": "CM-BULK-DEAL-3", "fileKey": "CM-BULK-DEAL", "filePath": "https://nsearchives.nseindia.in/content/equities/", "filePosition": 16, "fileSegment": "CM", "fileSize": "0.00 KB", "tradingDate": "19-Nov-2026"}
+  ]
+}

@@ -1,0 +1,77 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "nselite"
+version = "0.1.0"
+description = "Lean, async-first Python client for NSE India end-of-day reports and market data"
+readme = "README.md"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+requires-python = ">=3.13"
+keywords = ["nse", "nse-india", "bhavcopy", "stock-market", "xbrl"]
+authors = [{ name = "PriceCatch" }]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Framework :: AsyncIO",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Financial and Insurance Industry",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: 3.15",
+  "Topic :: Office/Business :: Financial :: Investment",
+  "Typing :: Typed",
+]
+dependencies = [
+    "httpx[http2]>=0.28.1",
+    "orjson>=3.13.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/PriceCatch/nselite"
+Issues = "https://github.com/PriceCatch/nselite/issues"
+Changelog = "https://github.com/PriceCatch/nselite/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+pandas = [
+    "pandas>=3.1.1",
+]
+polars = [
+    "polars>=2.1.0",
+]
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.414",
+    "pytest>=9.2.0",
+    "pytest-asyncio>=1.5.0",
+    "respx>=0.23.1",
+    "ruff>=0.17.6",
+]
+
+[tool.hatch.build.targets.sdist]
+exclude = [".github", "tests", "benchmarks", "docs"]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "N", "SIM", "UP", "W", "ASYNC", "RUF", "PERF"]
+ignore = ["N818"]  # NotAvailable, RateLimited etc. read better without an Error suffix
+
+[tool.pyright]
+include = ["src", "tests"]
+pythonVersion = "3.13"
+typeCheckingMode = "strict"
+reportMissingTypeStubs = false
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests/unit"]
+markers = ["live: hits the real NSE website (run nightly, not on every push)"]
+addopts = "-ra"

@@ -1,0 +1,27 @@
+name: Live NSE
+on:
+  schedule:
+    - cron: "30 14 * * 1-5" # 20:00 IST, after NSE publishes end-of-day reports
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+        with:
+          python-version: "3.13"
+      - run: uv sync --locked
+      - run: uv run pytest tests/live -m live -v
+      - name: Open an issue on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --title "Live NSE tests failed $(date -u +%F)" \
+            --body "See ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}. Usually NSE changed a URL or file name."

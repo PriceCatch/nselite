@@ -1,7 +1,11 @@
-# nselite
+# nselite — Unofficial Python client for NSE India
 
-Lean, async-first Python client for NSE India end-of-day reports and market data.
-Python 3.12+, two runtime dependencies (`httpx[http2]`, `orjson`).
+Lean, async-first Python library to fetch publicly available end-of-day reports and market data
+from [NSE India](https://www.nseindia.in). Python 3.12+, two runtime dependencies
+(`httpx[http2]`, `orjson`).
+
+> nselite is an independent open-source project. It is not affiliated with, endorsed by or
+> connected to National Stock Exchange of India Ltd. See [Disclaimer](#disclaimer).
 
 ```python
 import asyncio
@@ -77,7 +81,27 @@ Change one import; old method names and error handling keep working:
 from nselite.compat import NSE  # was: from nse import NSE
 ```
 
-See [docs/SOP.md](docs/SOP.md) for setup, adding reports, testing and releases.
+- `except RuntimeError` / `ConnectionError` blocks keep working: nselite's errors subclass them.
+- A method outside nselite's scope (derivatives, option chain, IPO lists...) raises an
+  `AttributeError` that names it.
+- `nse.lookup()` still returns the old `{"symbols": [...]}` shape through compat; the native
+  `NSE.lookup()` returns NSE's current flat list.
+- Later, move hot paths to the async `nselite.NSE` to download many dates concurrently.
+
+## Troubleshooting
+
+| Symptom | Likely cause | Fix |
+| --- | --- | --- |
+| `SessionExpired` | NSE rejected cookies twice | `nse.forget_cookies()` or delete `~/.cache/nselite/cookies.json`; check the site opens in a browser |
+| `NotAvailable` on a download | Not published yet (before ~18:30 IST), a holiday, or file renamed | Retry later; check the date; compare with `await nse.daily_reports(...)` |
+| 404 on every archive URL | NSE moved the archives host | Set `NSE_ARCHIVES_HOST` |
+| `RateLimited` / IP blocked | `rps` set too high | Go back to the default `rps=3`; wait 10–15 minutes |
+| Repeated `RemoteProtocolError` | NSE dropping idle HTTP/2 connections | Already retried; if it persists use `NSE(http2=False)` |
+
+## Contributing
+
+See [CONTRIBUTING.md](https://github.com/PriceCatch/nselite/blob/main/CONTRIBUTING.md) for setup,
+adding reports and endpoints, checks and releases.
 
 ## Credits
 
@@ -88,6 +112,23 @@ Thank you, Benny.
 
 Report URL patterns and date-chunking limits were cross-checked against
 [nselib](https://github.com/RuchiTanmay/nselib) by Ruchi Tanmay and Amlan Mishra.
+
+## Disclaimer
+
+- **Unofficial.** nselite is not affiliated with, endorsed by, sponsored by or connected to
+  National Stock Exchange of India Ltd (NSE) or NSE Indices Ltd. "NSE", "NIFTY" and related names
+  are trademarks of their respective owners and are used here only to describe the data source.
+- **Public data only.** nselite requests the same pages, APIs and archive files that NSE publishes
+  on its public website for anyone to view or download. It needs no login and does not access
+  anything behind one.
+- **NSE's terms apply.** The data belongs to NSE. Your use of it, especially redistribution or
+  commercial use, is subject to NSE's [terms of use](https://www.nseindia.in/nse-terms-of-use). Check
+  them, and get permission from NSE where required.
+- **Use it gently.** Requests are limited to 3 per second by default. Don't raise that limit or
+  run many clients in parallel; heavy traffic can get your IP blocked and burdens NSE's servers.
+- **No warranty.** Data may be delayed, incomplete or wrong, and NSE can change or withdraw any
+  endpoint without notice. Nothing here is investment advice. nselite is provided as is, without
+  warranty of any kind; see [LICENSE](https://github.com/PriceCatch/nselite/blob/main/LICENSE).
 
 ## License
 

@@ -2,6 +2,16 @@
 
 All notable changes to nselite. Versions follow SemVer; below 1.0 a public rename is a minor bump.
 
+## 0.2.2 — 2026-11-20
+
+Documentation only; no code changes.
+
+### Changed
+- README states that nselite is unofficial, fetches only publicly available NSE data, and is not
+  affiliated with NSE; new Disclaimer section (NSE's terms of use, rate limits, no warranty).
+  PyPI description now starts with "Unofficial".
+- `docs/SOP.md` is now `CONTRIBUTING.md`. Troubleshooting and migration notes moved to the README.
+
 ## 0.2.1 — 2026-11-20
 
 ### Changed

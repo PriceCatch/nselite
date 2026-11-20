@@ -1,7 +1,7 @@
 # nselite
 
 Lean, async-first Python client for NSE India end-of-day reports and market data.
-Python 3.13+, two runtime dependencies (`httpx[http2]`, `orjson`).
+Python 3.12+, two runtime dependencies (`httpx[http2]`, `orjson`).
 
 ```python
 import asyncio

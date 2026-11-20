@@ -2,6 +2,12 @@
 
 All notable changes to nselite. Versions follow SemVer; below 1.0 a public rename is a minor bump.
 
+## 0.2.1 — 2026-11-20
+
+### Changed
+- Supports Python 3.12 (was 3.13+). No code changes were needed; CI now tests 3.12–3.15.
+  This lets nselite replace the NseIndiaApi fork in existing 3.12 environments.
+
 ## 0.2.0 — 2026-11-20
 
 Phase 3 of the plan.

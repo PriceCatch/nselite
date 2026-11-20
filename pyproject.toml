@@ -4,12 +4,12 @@ build-backend = "hatchling.build"
 
 [project]
 name = "nselite"
-version = "0.2.0"
+version = "0.2.1"
 description = "Lean, async-first Python client for NSE India end-of-day reports and market data"
 readme = "README.md"
 license = "GPL-3.0-or-later"
 license-files = ["LICENSE"]
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 keywords = ["nse", "nse-india", "bhavcopy", "stock-market", "xbrl"]
 authors = [{ name = "PriceCatch" }]
 maintainers = [{ name = "PriceCatch" }]
@@ -20,6 +20,7 @@ classifiers = [
   "Intended Audience :: Financial and Insurance Industry",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
   "Programming Language :: Python :: 3.15",
@@ -58,7 +59,7 @@ dev = [
 exclude = [".github", "tests", "benchmarks", "docs"]
 
 [tool.ruff]
-target-version = "py313"
+target-version = "py312"
 line-length = 100
 
 [tool.ruff.lint]
@@ -67,7 +68,7 @@ ignore = ["N818"]  # NotAvailable, RateLimited etc. read better without an Error
 
 [tool.pyright]
 include = ["src", "tests"]
-pythonVersion = "3.13"
+pythonVersion = "3.12"
 typeCheckingMode = "strict"
 reportMissingTypeStubs = false
 

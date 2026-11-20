@@ -40,7 +40,7 @@ procedures and must match the code.
 
 | When | What | Where |
 | --- | --- | --- |
-| Every push / PR | `ruff format --check`, `ruff check`, `pyright` (strict), unit tests on 3.13–3.15 | `.github/workflows/ci.yml` |
+| Every push / PR | `ruff format --check`, `ruff check`, `pyright` (strict), unit tests on 3.12–3.15 | `.github/workflows/ci.yml` |
 | Weekdays 20:00 IST | Live tests against NSE; failure opens an issue | `.github/workflows/live.yml` |
 | Tag `v*` | Build and publish to PyPI via trusted publishing | `.github/workflows/release.yml` |
 

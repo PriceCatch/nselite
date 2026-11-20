@@ -41,6 +41,9 @@ _RENAMED = {
     "liveVolumeGainers": "volume_gainers",
     "volume_gainers": "volume_gainers",
     "listTradedStocks": "traded_stocks",
+    "fetch_equity_historical_data": "equity_history",
+    "fetch_historical_index_data": "index_history",
+    "fetch_historical_vix_data": "vix_history",
 }
 
 
@@ -52,6 +55,8 @@ class NSE:
     :param timeout: network timeout in seconds.
     :param use_requests_library: accepted and ignored.
     """
+
+    __version__ = "4.0.1"  # fork version this mirrors; eod2 checks it
 
     SEGMENT_EQUITY = "equities"
     SEGMENT_SME = "sme"

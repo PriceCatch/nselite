@@ -12,10 +12,11 @@ from ._http import Http
 from .archives import ArchivesMixin
 from .corporate import CorporateMixin
 from .filings import FilingsMixin
+from .history import HistoryMixin
 from .market import MarketMixin
 
 
-class NSE(ArchivesMixin, CorporateMixin, FilingsMixin, MarketMixin):
+class NSE(ArchivesMixin, CorporateMixin, FilingsMixin, HistoryMixin, MarketMixin):
     """Async NSE client. Use one instance per process and share it across tasks.
 
     >>> async with NSE() as nse:

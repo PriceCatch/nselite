@@ -33,6 +33,8 @@ Blocking scripts can use `SyncNSE`, which has the same methods without `await`.
 | corporate | `actions`, `announcements`, `board_meetings`, `event_calendar`, `annual_reports`, `circulars`, `download_document` |
 | filings | `financial_results`, `results_comparison`, `integrated_filing_results`, `financial_results_xbrl`, `download_xbrl`, `fetch_xbrl_filings` |
 | market | `status`, `lookup`, `holidays`, `equity_stocks_by_index`, `volume_gainers`, `traded_stocks`, `gainers`, `losers` |
+| history | `equity_history`, `index_history`, `vix_history` (complete, oldest first) |
+| frames | `read_report`, `to_pandas`, `to_polars` (install `nselite[pandas]` or `nselite[polars]`) |
 
 Derivatives are out of scope.
 
@@ -46,4 +48,16 @@ from nselite.compat import NSE  # was: from nse import NSE
 
 See [docs/SOP.md](docs/SOP.md) for setup, adding reports, testing and releases.
 
-Licensed GPL-3.0-or-later (parts derive from NseIndiaApi by Benny Thadikaran).
+## Credits
+
+nselite is built on the work of **[Benny Thadikaran](https://github.com/BennyThadikaran)**, author of
+[NseIndiaApi](https://github.com/BennyThadikaran/NseIndiaApi). Its session handling, endpoint
+knowledge and corporate-filing code are the foundation nselite was trimmed down and rebuilt from.
+Thank you, Benny.
+
+Report URL patterns and date-chunking limits were cross-checked against
+[nselib](https://github.com/RuchiTanmay/nselib) by Ruchi Tanmay and Amlan Mishra.
+
+## License
+
+GPL-3.0-or-later, the same license as NseIndiaApi, from which parts of this code derive.

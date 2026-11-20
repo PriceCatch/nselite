@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "nselite"
-version = "0.1.0"
+version = "0.2.0"
 description = "Lean, async-first Python client for NSE India end-of-day reports and market data"
 readme = "README.md"
 license = "GPL-3.0-or-later"
@@ -12,6 +12,7 @@ license-files = ["LICENSE"]
 requires-python = ">=3.13"
 keywords = ["nse", "nse-india", "bhavcopy", "stock-market", "xbrl"]
 authors = [{ name = "PriceCatch" }]
+maintainers = [{ name = "PriceCatch" }]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Framework :: AsyncIO",
@@ -34,6 +35,7 @@ dependencies = [
 Homepage = "https://github.com/PriceCatch/nselite"
 Issues = "https://github.com/PriceCatch/nselite/issues"
 Changelog = "https://github.com/PriceCatch/nselite/blob/main/CHANGELOG.md"
+"Based on NseIndiaApi by Benny Thadikaran" = "https://github.com/BennyThadikaran/NseIndiaApi"
 
 [project.optional-dependencies]
 pandas = [

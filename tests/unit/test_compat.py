@@ -59,3 +59,9 @@ def test_lookup_keeps_old_shape(old: NSE) -> None:
             res = nse.lookup("hdfcbank")
             assert res["symbols"][0]["symbol_info"] == "HDFC Bank Limited"
             assert res["symbols"][0]["symbol"] == "HDFCBANK"
+
+
+def test_reports_fork_version_for_eod2() -> None:
+    from nselite import compat
+
+    assert compat.NSE.__version__ == "4.0.1"

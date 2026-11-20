@@ -80,3 +80,34 @@ async def test_xbrl_both_sources(tmp_path: Path) -> None:
         )
         assert {r["source"] for r in recs} == {"results", "integrated"}
         assert all(r["error"] is None for r in recs), [r["error"] for r in recs]
+
+
+async def test_history_multi_chunk_is_ordered_and_complete() -> None:
+    from datetime import date
+
+    async with NSE() as nse:
+        eq = await nse.equity_history("TCS", date(2026, 1, 1), date(2026, 11, 19))
+        ix = await nse.index_history("NIFTY 50", date(2025, 1, 1), date(2026, 11, 19))
+        vix = await nse.vix_history(date(2025, 6, 1), date(2026, 11, 19))
+    for rows in (eq, ix, vix):
+        days = [r["date"] for r in rows]
+        assert days == sorted(days) and len(days) == len(set(days))
+    assert len(eq) > 200, (
+        f"equity rows truncated: {len(eq)}"
+    )  # ~225 sessions; fork-style 100-day chunks risk the 70-row cap
+    assert len(ix) > 450
+    assert len(vix) > 300
+
+
+async def test_frames_read_real_reports(tmp_path: Path) -> None:
+    from nselite.frames import read_report
+
+    async with NSE() as nse:
+        day = (await nse.daily_reports("CM")).latest(ReportKey.CM_UDIFF_BHAVCOPY).trading_date
+        delivery = await nse.delivery_bhavcopy(day, tmp_path)
+        bhav_zip = await nse.download_report(ReportKey.CM_UDIFF_BHAVCOPY, tmp_path, day)
+    df = read_report(delivery)
+    assert {"SYMBOL", "SERIES", "DELIV_QTY"} <= set(df.columns)
+    assert "EQ" in set(df["SERIES"])  # padding stripped
+    pl_df = read_report(bhav_zip, engine="polars")
+    assert pl_df.height > 1000

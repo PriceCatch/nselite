@@ -41,7 +41,7 @@ Derivatives are out of scope.
 Change one import; old method names and error handling keep working:
 
 ```python
-from nselite.compat import NSE   # was: from nse import NSE
+from nselite.compat import NSE  # was: from nse import NSE
 ```
 
 See [docs/SOP.md](docs/SOP.md) for setup, adding reports, testing and releases.

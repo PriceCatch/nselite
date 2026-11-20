@@ -35,7 +35,7 @@ dependencies = [
 Homepage = "https://github.com/PriceCatch/nselite"
 Issues = "https://github.com/PriceCatch/nselite/issues"
 Changelog = "https://github.com/PriceCatch/nselite/blob/main/CHANGELOG.md"
-"Based on NseIndiaApi by Benny Thadikaran" = "https://github.com/BennyThadikaran/NseIndiaApi"
+"Upstream (NseIndiaApi)" = "https://github.com/BennyThadikaran/NseIndiaApi"
 
 [project.optional-dependencies]
 pandas = [

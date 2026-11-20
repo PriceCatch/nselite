@@ -16,6 +16,7 @@ Phase 3 of the plan.
 - Compat names `fetch_equity_historical_data`, `fetch_historical_index_data`,
   `fetch_historical_vix_data`.
 - Credits to Benny Thadikaran (NseIndiaApi) in README and package metadata.
+- `examples/`: eight runnable scripts covering every public function; README examples section.
 
 ### Fixed (vs the NseIndiaApi 4.0.1 fork)
 - The fork predates upstream's `csv=true` fix, so its index/VIX history got NSE's 70-row

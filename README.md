@@ -24,6 +24,37 @@ asyncio.run(main())
 
 Blocking scripts can use `SyncNSE`, which has the same methods without `await`.
 
+More in a few lines:
+
+```python
+from datetime import date
+from nselite import SyncNSE
+from nselite.frames import to_pandas
+
+with SyncNSE() as nse:
+    nifty = nse.index_history("NIFTY 50", date(2021, 1, 1), date(2026, 1, 1))  # all 5 years
+    df = to_pandas(nse.equity_history("TCS")).set_index("date")  # last 30 days
+    holidays = nse.holidays()["CM"]
+    movers = nse.equity_stocks_by_index("NIFTY 50")
+```
+
+## Examples
+
+Runnable scripts for every function, in [`examples/`](https://github.com/PriceCatch/nselite/tree/main/examples):
+
+| Script | Shows |
+| --- | --- |
+| [01_daily_reports.py](https://github.com/PriceCatch/nselite/blob/main/examples/01_daily_reports.py) | List NSE's daily files, download the latest, backfill a range (holidays → `None`) |
+| [02_archives_and_frames.py](https://github.com/PriceCatch/nselite/blob/main/examples/02_archives_and_frames.py) | All bhavcopies for a day, `NotAvailable` on holidays, `read_report` into pandas |
+| [03_history.py](https://github.com/PriceCatch/nselite/blob/main/examples/03_history.py) | Stock, index and VIX history over any range, as a DataFrame |
+| [04_market.py](https://github.com/PriceCatch/nselite/blob/main/examples/04_market.py) | Market status, holidays, symbol search, index constituents, gainers/losers, volume spikes |
+| [05_corporate.py](https://github.com/PriceCatch/nselite/blob/main/examples/05_corporate.py) | Corporate actions, announcements, board meetings, event calendar, circulars, annual reports |
+| [06_filings.py](https://github.com/PriceCatch/nselite/blob/main/examples/06_filings.py) | Financial results, results comparison, Integrated Filings, XBRL download |
+| [07_sync.py](https://github.com/PriceCatch/nselite/blob/main/examples/07_sync.py) | `SyncNSE` for plain scripts and notebooks |
+| [08_compat.py](https://github.com/PriceCatch/nselite/blob/main/examples/08_compat.py) | Drop-in replacement for NseIndiaApi scripts |
+
+Run one with `uv run python examples/03_history.py`; files go under `./data`.
+
 ## What it covers
 
 | Module | Methods |

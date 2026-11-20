@@ -34,6 +34,7 @@ procedures and must match the code.
 4. Return `dict` / `list` or a `TypedDict` / slotted dataclass. Let `NotAvailable` propagate;
    never return an empty result for a failure.
 5. Add a respx-mocked unit test with a trimmed real response in `tests/fixtures/`, plus a live test.
+6. Show the method in the matching `examples/` script and run it once.
 
 ## SOP-4 Test and CI
 

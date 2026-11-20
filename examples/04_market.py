@@ -22,6 +22,10 @@ async def main() -> None:
             print("lookup:", hit["symbol"], "-", hit["companyName"])
 
         # Constituents with live prices; row 0 is the index itself
+        # Every index, with its full name (for index_history) and short name (for constituents)
+        fin = next(i for i in await nse.indices() if i["index"] == "NIFTY FINANCIAL SERVICES")
+        print("financial services short name:", fin["indexSymbol"])
+
         nifty = await nse.equity_stocks_by_index("NIFTY 50")
         stocks = {"data": nifty["data"][1:]}
         print("top gainers:", [(r["symbol"], r["pChange"]) for r in gainers(stocks, 3)])

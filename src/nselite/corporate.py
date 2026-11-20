@@ -42,7 +42,7 @@ class CorporateMixin:
         """Corporate actions (dividends, splits, bonus...). Forthcoming ones when no dates given."""
         params: dict[str, str | int] = {"index": segment}
         if symbol:
-            params["symbol"] = symbol
+            params["symbol"] = symbol.upper()
         date_range_params(params, from_date, to_date)
         return await self._http.get_json(f"{API_BASE}/corporates-corporateActions", params)
 
@@ -57,7 +57,7 @@ class CorporateMixin:
         """Corporate announcements; today's when no dates given. ``fno`` limits to F&O stocks."""
         params: dict[str, str | int] = {"index": index}
         if symbol:
-            params["symbol"] = symbol
+            params["symbol"] = symbol.upper()
         if fno:
             params["fo_sec"] = "true"
         date_range_params(params, from_date, to_date)
@@ -74,7 +74,7 @@ class CorporateMixin:
         """Board meetings; forthcoming ones when no dates given."""
         params: dict[str, str | int] = {"index": index}
         if symbol:
-            params["symbol"] = symbol
+            params["symbol"] = symbol.upper()
         if fno:
             params["fo_sec"] = "true"
         date_range_params(params, from_date, to_date)
@@ -89,7 +89,7 @@ class CorporateMixin:
     ) -> dict[str, list[Record]]:
         """Annual report links per year (``data[i]["fileName"]`` -> :meth:`download_document`)."""
         return await self._http.get_json(
-            f"{API_BASE}/annual-reports", {"index": segment, "symbol": symbol}
+            f"{API_BASE}/annual-reports", {"index": segment, "symbol": symbol.upper()}
         )
 
     async def circulars(

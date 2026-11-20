@@ -26,6 +26,8 @@ will flag it.
    `test_every_report_key_has_a_spec` fails until step 3 is done.
 5. Run `uv run pytest tests/live -m live`. `test_patterns_match_listed_files` checks the pattern
    against NSE's live listing.
+6. Add the key's row to the table in `REFERENCE.md`. `test_every_report_key_is_documented`
+   fails until you do.
 
 ## Add an API endpoint
 

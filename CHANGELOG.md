@@ -2,6 +2,20 @@
 
 All notable changes to nselite. Versions follow SemVer; below 1.0 a public rename is a minor bump.
 
+## 0.3.0 — 2026-11-20
+
+### Added
+- `REFERENCE.md`: every `ReportKey` with its NSE file, accepted parameter values, index names,
+  series codes, client settings and errors. A unit test keeps the report table complete.
+- `NSE.indices()`: all ~140 NSE indices with both name forms. `index_history` takes the full name
+  (`NIFTY FINANCIAL SERVICES`), `equity_stocks_by_index` the short one (`NIFTY FIN SERVICE`);
+  NSE returns no rows, not an error, for the wrong form.
+- README states the scope: equities, indices and VIX; no F&O, currency or commodity data.
+
+### Changed
+- `actions`, `announcements`, `board_meetings` and `annual_reports` upper-case the symbol, like
+  the other methods.
+
 ## 0.2.2 — 2026-11-20
 
 Documentation only; no code changes.

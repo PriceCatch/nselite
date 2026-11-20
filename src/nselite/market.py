@@ -44,8 +44,20 @@ class MarketMixin:
         """Holiday list per segment; ``CM`` is the equity market."""
         return await self._http.get_json(f"{API_BASE}/holiday-master", {"type": type})
 
+    async def indices(self) -> list[Record]:
+        """Every NSE index with its live value, ~140 rows.
+
+        Each row has ``index`` (full name, e.g. ``NIFTY FINANCIAL SERVICES``: pass it to
+        :meth:`index_history`), ``indexSymbol`` (short name, e.g. ``NIFTY FIN SERVICE``: pass it
+        to :meth:`equity_stocks_by_index`) and ``key`` (category, e.g. ``SECTORAL INDICES``).
+        NSE returns no rows, not an error, for a name in the wrong form.
+        """
+        data = await self._http.get_json(f"{API_BASE}/allIndices")
+        return data["data"]
+
     async def equity_stocks_by_index(self, index: str = "NIFTY 50") -> Record:
-        """Live constituents of an index, e.g. ``NIFTY 50`` or ``PERMITTED TO TRADE``."""
+        """Live constituents of an index by its short ``indexSymbol``, e.g. ``NIFTY 50``,
+        ``NIFTY FIN SERVICE`` or ``PERMITTED TO TRADE`` (see :meth:`indices`)."""
         index = index.upper()
         endpoint = "equity-stockIndex" if index == "PERMITTED TO TRADE" else "equity-stock-indices"
         return await self._http.get_json(f"{API_BASE}/{endpoint}", {"index": index})

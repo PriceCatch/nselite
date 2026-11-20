@@ -106,7 +106,8 @@ class HistoryMixin:
     async def index_history(
         self, index: str, from_date: date | None = None, to_date: date | None = None
     ) -> list[Record]:
-        """Daily OHLC, turnover and volume for an index such as ``NIFTY 50``."""
+        """Daily OHLC, turnover and volume for an index by its full name, e.g. ``NIFTY 50`` or
+        ``NIFTY FINANCIAL SERVICES`` (the ``index`` column of :meth:`indices`)."""
         start, end = _window(from_date, to_date)
 
         async def fetch(s: date, e: date) -> list[Record]:

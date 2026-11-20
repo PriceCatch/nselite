@@ -90,3 +90,15 @@ def test_gainers_and_losers() -> None:
     data = {"data": [{"pChange": 2.0}, {"pChange": -1.0}, {"pChange": 5.0}, {"pChange": -3.0}]}
     assert [r["pChange"] for r in gainers(data)] == [5.0, 2.0]
     assert [r["pChange"] for r in losers(data, 1)] == [-3.0]
+
+
+async def test_indices_unwraps_data(nse: NSE, router: respx.MockRouter) -> None:
+    row = {"key": "SECTORAL INDICES", "index": "NIFTY IT", "indexSymbol": "NIFTY IT"}
+    router.get(f"{API}/allIndices").respond(200, json={"data": [row]})
+    assert await nse.indices() == [row]
+
+
+async def test_corporate_symbols_are_upper_cased(nse: NSE, router: respx.MockRouter) -> None:
+    route = router.get(f"{API}/annual-reports").respond(200, json={"data": []})
+    await nse.annual_reports("tcs")
+    assert route.calls.last.request.url.params["symbol"] == "TCS"

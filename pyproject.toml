@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "nselite"
-version = "0.2.2"
+version = "0.3.0"
 description = "Unofficial, lean, async-first Python client for publicly available NSE India end-of-day reports and market data"
 readme = "README.md"
 license = "GPL-3.0-or-later"

@@ -7,6 +7,10 @@ from [NSE India](https://www.nseindia.in). Python 3.12+, two runtime dependencie
 > nselite is an independent open-source project. It is not affiliated with, endorsed by or
 > connected to National Stock Exchange of India Ltd. See [Disclaimer](#disclaimer).
 
+**Focus: equities.** nselite covers the capital market (equities, including SME), indices and
+India VIX. **Futures and options (F&O) data, including option chains and open interest, are not
+available**, and neither are currency or commodity markets.
+
 ```python
 import asyncio
 from datetime import date
@@ -67,11 +71,16 @@ Run one with `uv run python examples/03_history.py`; files go under `./data`.
 | archives | `equity_bhavcopy`, `delivery_bhavcopy`, `indices_bhavcopy`, `priceband_report`, `pr_bhavcopy`, `cm_mii_security_report` |
 | corporate | `actions`, `announcements`, `board_meetings`, `event_calendar`, `annual_reports`, `circulars`, `download_document` |
 | filings | `financial_results`, `results_comparison`, `integrated_filing_results`, `financial_results_xbrl`, `download_xbrl`, `fetch_xbrl_filings` |
-| market | `status`, `lookup`, `holidays`, `equity_stocks_by_index`, `volume_gainers`, `traded_stocks`, `gainers`, `losers` |
+| market | `status`, `lookup`, `holidays`, `indices`, `equity_stocks_by_index`, `volume_gainers`, `traded_stocks`, `gainers`, `losers` |
 | history | `equity_history`, `index_history`, `vix_history` (complete, oldest first) |
 | frames | `read_report`, `to_pandas`, `to_polars` (install `nselite[pandas]` or `nselite[polars]`) |
 
-Derivatives are out of scope.
+Not covered: futures and options (option chains, open interest, F&O bhavcopies), currency and
+commodity derivatives, and per-symbol live quotes.
+
+**All options in one place:** [REFERENCE.md](https://github.com/PriceCatch/nselite/blob/main/REFERENCE.md) lists every `ReportKey` with its NSE file, the
+accepted values of every parameter, index names (NSE spells them differently per endpoint),
+series codes, client settings and errors.
 
 ## Migrating from NseIndiaApi
 
